@@ -9,15 +9,15 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:extension.showAnalysisFromJSON"
+  ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "git-commenter.helloWorld",
-        "title": "Hello World"
-      }
-    ]
+    "commands": [{
+      "command": "extension.showAnalysisFromJSON",
+      "title": "Show Analysis From JSON"
+    }]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
