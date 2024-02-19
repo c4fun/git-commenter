@@ -1,6 +1,6 @@
 # git-commenter README
 
-This is the README for your extension "git-commenter". After writing up a brief description, we recommend including the following sections.
+git-commenter is a lightweight vscode plugins that can automatically read and display comments for a git repository. It does not work alone right now, i.e. it works alone with [llm-project-helper](https://github.com/c4fun/llm-project-helper). The latter one extracts information for the plugin to show.
 
 ## Features
 
@@ -35,17 +35,9 @@ Calling out known issues can help limit users opening duplicate issues against y
 
 Users appreciate release notes as you update your extension.
 
-### 1.0.0
+### 0.0.1
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+alpha version
 
 ---
 
