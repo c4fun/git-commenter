@@ -7,7 +7,8 @@ import { homedir } from 'os';
 let autoShowComments = false;
 
 const workspaceDir = "~/.llm-project-helper/workspaces";
-const localRepoFolder = "/home/richardliu/code";
+// const localRepoFolder = "/home/richardliu/code";
+const localRepoFolder = "/Users/laurichard/code";
 
 // a list of str called availableSaaS including github.com, gitee.com, gitlab.com, jihulab.com
 const availableSaaS = ["github.com", "gitee.com", "gitlab.com", "jihulab.com"];
@@ -50,6 +51,26 @@ function constructAnalysisFilePath(filePath: string): string {
     }
 }
 
+function constructAdjustedFilePath(filePath: string): string {
+
+    // 查找路径中包含的 SaaS 平台名称
+    const saasName = availableSaaS.find(saas => filePath.includes(saas));
+
+    // 如果找到了 SaaS 平台名称，使用它作为分割点来构造相对路径
+    if (saasName) {
+        // 获取 SaaS 平台名称在路径中的索引，并据此切割字符串，构造相对路径部分
+        const parts = filePath.split(saasName);
+        const adjustedPath = saasName + parts[1];
+
+        // 构造并返回分析文件的完整路径
+        return path.join(localRepoFolder, adjustedPath);
+    } else {
+        // 如果路径中不包含已知的 SaaS 平台名称，则可能需要返回一个错误或者使用一个默认行为
+        console.error('Unable to locate SaaS platform name in the file path.');
+        return ''; // 或者采取其他默认行为
+    }
+}
+
 
 // 把显示注释的逻辑封装成一个函数
 function showCommentsForActiveFile() {
@@ -72,8 +93,10 @@ function showCommentsForActiveFile() {
 
            const analysisData = JSON.parse(data);
 
+           const adjustedFilePath = constructAdjustedFilePath(analysisData.file_path);
+           console.log("调整后的文件路径为：" + adjustedFilePath);
            // 确保当前打开的文件是我们想要分析的文件
-           if (editor.document.uri.fsPath !== analysisData.file_path) {
+           if (editor.document.uri.fsPath !== adjustedFilePath) {
                vscode.window.showWarningMessage('The open file does not match the analysis data');
                return;
            }
