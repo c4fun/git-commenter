@@ -7,8 +7,9 @@ import { homedir } from 'os';
 let autoShowComments = false;
 
 const workspaceDir = "~/.llm-project-helper/workspaces";
-// const localRepoFolder = "/home/richardliu/code";
-const localRepoFolder = "/Users/laurichard/code";
+
+// localRepoFolder is dependent on the os, for example, it is "/home/richardliu/code" in Ubuntu and "/Users/laurichard/code" in MacOS
+const localRepoFolder = homedir() + "/code";
 
 // a list of str called availableSaaS including github.com, gitee.com, gitlab.com, jihulab.com
 const availableSaaS = ["github.com", "gitee.com", "gitlab.com", "jihulab.com"];
@@ -138,54 +139,5 @@ export function activate(context: vscode.ExtensionContext) {
         }
     });
 }
-
-// export function activate(context: vscode.ExtensionContext) {
-//     let disposable = vscode.commands.registerCommand('extension.showAnalysisFromJSON', () => {
-//         const editor = vscode.window.activeTextEditor;
-//         if (!editor) {
-//             vscode.window.showInformationMessage('No editor is active');
-//             return;
-//         }
-
-//         // 获取当前激活的文件路径
-//         const currentFilePath = editor.document.uri.fsPath;
-//         // 根据当前文件路径构造分析文件路径
-//         const jsonFilePath = constructAnalysisFilePath(currentFilePath);
-//         console.log("分析文件路径为：" + jsonFilePath);
-
-//         fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-//             if (err) {
-//                 vscode.window.showErrorMessage('Failed to read analysis data');
-//                 return;
-//             }
-
-//             const analysisData = JSON.parse(data);
-
-//             // 确保当前打开的文件是我们想要分析的文件
-//             if (editor.document.uri.fsPath !== analysisData.file_path) {
-//                 vscode.window.showWarningMessage('The open file does not match the analysis data');
-//                 return;
-//             }
-
-//             const decorationsArray: vscode.DecorationOptions[] = analysisData.comments.map((comment: { line_no: number; remark: string }) => {
-//                 const startPos = new vscode.Position(comment.line_no - 1, 0);
-//                 const endPos = new vscode.Position(comment.line_no - 1, 0);
-//                 return {
-//                     range: new vscode.Range(startPos, endPos),
-//                     hoverMessage: comment.remark
-//                 };
-//             });
-
-//             const decorationType = vscode.window.createTextEditorDecorationType({
-//                 isWholeLine: true,
-//                 backgroundColor: 'rgba(255,255,0,0.1)'
-//             });
-
-//             editor.setDecorations(decorationType, decorationsArray);
-//         });
-//     });
-
-//     context.subscriptions.push(disposable);
-// }
 
 export function deactivate() {}
