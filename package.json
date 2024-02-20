@@ -2,7 +2,7 @@
   "name": "git-commenter",
   "displayName": "git-commenter",
   "description": "A git commenter that reads information from llm-helper-project and display code remarks in vscode",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.86.0"
   },
