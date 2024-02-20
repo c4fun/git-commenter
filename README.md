@@ -39,6 +39,10 @@ Users appreciate release notes as you update your extension.
 
 alpha version
 
+### 0.0.2
+
+Add mac support
+
 ---
 
 ## Following extension guidelines
